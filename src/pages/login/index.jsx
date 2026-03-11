@@ -24,10 +24,19 @@ export default function Login() {
         setIsLoading(true)
 
         try {
+            // When on github pages (production), point to the localtunnel URL or backend. 
+            // We use the proxied '/api' in local Vite development, but github pages needs an absolute URL.
+            const baseUrl = import.meta.env.PROD 
+                ? 'https://violet-rabbits-play.loca.lt' // Using the active localtunnel
+                : ''
+                
             const endpoint = isLoginView ? '/api/login' : '/api/register'
-            const response = await fetch(endpoint, {
+            const response = await fetch(`${baseUrl}${endpoint}`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Bypass-Tunnel-Reminder': 'true' // Required to bypass localtunnel warning page
+                },
                 body: JSON.stringify(formData)
             })
 
