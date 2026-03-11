@@ -24,10 +24,9 @@ export default function Login() {
         setIsLoading(true)
 
         try {
-            // When on github pages (production), point to the localtunnel URL or backend. 
-            // We use the proxied '/api' in local Vite development, but github pages needs an absolute URL.
+            // When on github pages (production), point to the localtunnel URL running on the backend (port 5050)
             const baseUrl = import.meta.env.PROD 
-                ? 'https://violet-rabbits-play.loca.lt' // Using the active localtunnel
+                ? 'https://slow-geckos-repeat.loca.lt' 
                 : ''
                 
             const endpoint = isLoginView ? '/api/login' : '/api/register'
